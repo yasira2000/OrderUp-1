@@ -1,19 +1,29 @@
-import { Avatar, Button, Dropdown, Flowbite, Navbar, TextInput } from 'flowbite-react'
-import {Link, useLocation} from 'react-router-dom'
-import { RiAccountCircleLine } from "react-icons/ri";
+import { Navbar } from "flowbite-react";
+import { Link } from "react-router-dom";
+import { GoPerson } from "react-icons/go";
+import { AiOutlineBell } from "react-icons/ai";
+import TempLogo from "../Images/Temp-Logo-Order-Up.png"; // Adjust path as necessary
 
 export default function Header() {
   return (
-    <Navbar className = 'border-b-50 flex flex-col gap-3'>
-      <Link to='/'>
-        <img class="h-auto max-w-full" src='../Images/Temp-Logo-Order-Up.png'/>
-      </Link>
-      <Button className='w-12 h-10 hidden sm:inline' color='gray' pill>
-        Notifications
-      </Button>
-      <Button className='w-12 h-10 hidden sm:inline' color='gray' pill >
-        <RiAccountCircleLine />
-      </Button>
+    <Navbar className="border-b flex flex-col gap-3 p-4 sm:p-6 bg-customBackground">
+      <div className="flex items-center justify-between w-full ">
+        <Link to="/">
+          <img className="h-auto max-w-40" src={TempLogo} alt="Temp Logo" />
+        </Link>
+        <div className="flex space-x-4">
+          <div className="bg-white rounded-3xl p-1 w-12 h-11 flex items-center justify-center">
+            <Link to="/notifications">
+              <AiOutlineBell size={32} />
+            </Link>
+          </div>
+          <div className="bg-white rounded-3xl p-1 w-12 h-11 flex items-center justify-center">
+            <Link to="/profile">
+              <GoPerson size={32} />
+            </Link>
+          </div>
+        </div>
+      </div>
     </Navbar>
-  )
+  );
 }
