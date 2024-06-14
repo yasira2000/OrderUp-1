@@ -15,6 +15,17 @@ export default function Home() {
     <div>
       <SearchBar />
       <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
+      <MealCategories iconTitles={mealTypes} />
     </div>
   );
 }

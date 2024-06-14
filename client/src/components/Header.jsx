@@ -1,29 +1,46 @@
-import { Navbar } from "flowbite-react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineBell } from "react-icons/ai";
-import TempLogo from "../Images/Temp-Logo-Order-Up.png"; // Adjust path as necessary
+import TempLogo from "../Images/Temp-Logo-Order-Up.png";
+import { NavLink } from "react-router-dom";
 
-export default function Header() {
+const Header = () => {
   return (
-    <Navbar className="border-b flex flex-col gap-3 p-4 sm:p-6 bg-customBackground">
-      <div className="flex items-center justify-between w-full ">
+    <nav className="w-full bg-customBackground border-b z-10 sticky top-0">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/">
           <img className="h-auto max-w-40" src={TempLogo} alt="Temp Logo" />
         </Link>
         <div className="flex space-x-4">
-          <div className="bg-white rounded-3xl p-1 w-12 h-11 flex items-center justify-center">
-            <Link to="/notifications">
-              <AiOutlineBell size={32} />
-            </Link>
-          </div>
-          <div className="bg-white rounded-3xl p-1 w-12 h-11 flex items-center justify-center">
-            <Link to="/profile">
-              <GoPerson size={32} />
-            </Link>
-          </div>
+          <NavLink
+            to="/notifications"
+            className={({ isActive }) =>
+              `rounded-full p-2 transition duration-200 ${
+                isActive
+                  ? "bg-customButtonSelected text-customButtonSelectedText"
+                  : "bg-white hover:bg-gray-200 text-black"
+              }`
+            }
+          >
+            <AiOutlineBell className="size-8" />
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `rounded-full p-2 transition duration-200 ${
+                isActive
+                  ? "bg-customButtonSelected text-customButtonSelectedText"
+                  : "bg-white hover:bg-gray-200 text-black"
+              }`
+            }
+          >
+            <GoPerson className="size-8" />
+          </NavLink>
         </div>
       </div>
-    </Navbar>
+    </nav>
   );
-}
+};
+
+export default Header;
