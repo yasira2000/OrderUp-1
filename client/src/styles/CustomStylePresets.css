@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button-default {
+  @apply p-2 rounded-full text-xs bg-white text-black;
+}
+
+.button-pressed {
+  @apply bg-customButtonSelected text-customButtonSelectedText font-medium shadow-md;
+}

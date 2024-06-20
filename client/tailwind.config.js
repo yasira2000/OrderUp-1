@@ -10,5 +10,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".scrollbar-hide": {
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          "scrollbar-width": "none" /* Firefox */,
+          overflow: "-moz-scrollbars-none" /* Firefox */,
+        },
+        ".scrollbar-hide::-webkit-scrollbar": {
+          display: "none" /* Chrome, Safari, and Opera */,
+        },
+      };
+
+      addUtilities(newUtilities);
+    },
+  ],
 };

@@ -6,6 +6,11 @@ import NotificationsPage from "./pages/Notifications.jsx";
 import ProfilePage from "./pages/Profile.jsx";
 import BottomNavBar from "./components/BottomNavBar.jsx";
 
+import { FiHome } from "react-icons/fi";
+import { PiCallBellLight } from "react-icons/pi";
+import { PiNoteLight } from "react-icons/pi";
+import NavBarButton from "./components/NavbarButton.jsx";
+
 export default function App() {
   return (
     <div className="bg-customBackground min-h-screen">
@@ -16,7 +21,11 @@ export default function App() {
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
-        <BottomNavBar />
+        <BottomNavBar>
+          <NavBarButton to="/" icon={FiHome} position="left" />
+          <NavBarButton to="/alerts" icon={PiCallBellLight} position="middle" />
+          <NavBarButton to="/notes" icon={PiNoteLight} position="right" />
+        </BottomNavBar>
       </BrowserRouter>
     </div>
   );
