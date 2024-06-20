@@ -18,8 +18,7 @@ export default function Home() {
   const getDefaultFilters = () => ({
     category: null,
     inStock: false,
-    minPrice: "",
-    maxPrice: "",
+    maxPrice: { value: null, tabOpen: false },
     // Add more filters as needed
   });
 
@@ -30,12 +29,33 @@ export default function Home() {
   const resetFilters = () => {
     setFilters(getDefaultFilters());
   };
-
   const handleSingleValFilters = ({ filterName, value }) => {
     console.log(`${filterName} clicked noti from home: ${value}`);
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterName]: value,
+    }));
+  };
+
+  const handleSingleValPopupFilters = ({ filterName, value }) => {
+    console.log(`${filterName} clicked noti from home: ${value}`);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: {
+        ...prevFilters[filterName],
+        value: value,
+      },
+    }));
+  };
+
+  const enableFilterPopup = ({ filterName }) => {
+    console.log(`${filterName} clicked noti from home`);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: {
+        ...prevFilters[filterName],
+        tabOpen: true,
+      },
     }));
   };
 
@@ -64,10 +84,68 @@ export default function Home() {
           onPushdownFilterChange={handleToggleFilters}
           filterValue={filters.inStock}
         />
-        <FilterButtonPopUp>
-          <FilterPopUpMenue />
-        </FilterButtonPopUp>
+        <FilterButtonPopUp
+          filterDisplayName="Price"
+          filterName={"maxPrice"}
+          onFilterValueChange={enableFilterPopup}
+          filterValue={filters.maxPrice.value}
+        />
       </FilterSet>
+
+      <FilterPopUpMenue
+        filterDisplayName="Price"
+        filterName={"maxPrice"}
+        isVisible={filters.maxPrice.tabOpen}
+        items={["$10", "$20", "$30", "$40", "$50"]} // Example price ranges
+        selectedItem={filters.maxPrice.value}
+        // onReset={resetFilters}
+        onSubmit={handleSingleValPopupFilters}
+      />
+
+      <div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+        <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
+          <h3 className="text-lg font-semibold">dfdassdf</h3>
+          <p className="text-gray-500">sdfsadfs</p>
+          <p className="text-gray-700">{true ? "In Stock" : "Out of Stock"}</p>
+          <p className="text-gray-900">$345</p>
+        </div>
+      </div>
     </div>
   );
 }

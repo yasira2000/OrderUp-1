@@ -5,8 +5,10 @@ export default {
     extend: {
       colors: {
         customBackground: "#ECE6E3",
-        customButtonSelected: "#FDF0E7",
-        customButtonSelectedText: "#F09C67",
+        customButtonSelected: "#F09C67",
+        customButtonSelectedText: "#FFFFFF",
+        customButtonActive: "#FDF0E7",
+        customButtonActiveText: "#F09C67",
       },
     },
   },
@@ -26,4 +28,9 @@ export default {
       addUtilities(newUtilities);
     },
   ],
+  variants: {
+    extend: {
+      backgroundColor: ["active"],
+    },
+  },
 };

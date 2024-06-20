@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .button-default {
-  @apply p-2 rounded-full text-xs bg-white text-black;
+  @apply p-2 rounded-full text-xs bg-white text-black active:bg-customButtonActive active:text-customButtonActiveText;
 }
 
 .button-pressed {
-  @apply bg-customButtonSelected text-customButtonSelectedText font-medium shadow-md;
+  @apply p-2 rounded-full text-xs bg-customButtonSelected text-customButtonSelectedText font-medium shadow-md;
 }

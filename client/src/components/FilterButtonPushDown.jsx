@@ -15,9 +15,7 @@ function FilterButtonPushDown({
 
   return (
     <button
-      className={`p-2 rounded-full text-xs ${
-        filterValue ? "button-pressed" : "button-default"
-      }`}
+      className={` ${filterValue ? "button-pressed" : "button-default"}`}
       onClick={handleClick}
     >
       <div className="px-2">{filterDisplayName}</div>
