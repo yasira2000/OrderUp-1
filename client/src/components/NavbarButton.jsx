@@ -14,7 +14,7 @@ const NavBarButton = ({ to, icon: Icon, position }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `p-2 flex-1 flex flex-col items-center justify-center text-xs ${roundingClass} ${
+        `p-2 flex-1 flex flex-col items-center justify-center sha text-xs ${roundingClass} ${
           isActive
             ? "text-customButtonSelectedText bg-customButtonSelected"
             : "text-black bg-white"
@@ -24,6 +24,8 @@ const NavBarButton = ({ to, icon: Icon, position }) => {
         width: "48px",
         height: isActive ? "64px" : "60px",
         transition: "height 0.2s ease-in-out",
+        boxShadow:
+          "0 -4px 9px -1px rgba(0, 0, 0, 0.1), 0 -2px 10px -1px rgba(0, 0, 0, 0.06)", // Custom shadow casting upwards
       })}
     >
       <Icon className="size-10" style={{ strokeWidth: 1 }} />

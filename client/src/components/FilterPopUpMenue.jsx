@@ -1,69 +1,88 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { MainButton } from "./MainButton";
+import { SecondaryButton } from "./SecondaryButton";
 
-const FilterPopUpMenue = ({
+const FilterPopUpMenu = ({
   filterDisplayName,
   filterName,
   isVisible,
-  items,
   selectedItem,
-  onReset,
   onSubmit,
+  children,
+  submitButtonText,
+  cancleButtonText,
 }) => {
-  const [currentSelectedItem, setcurrentSelectedItem] = useState(selectedItem);
+  const [currentSelectedItem, setCurrentSelectedItem] = useState(selectedItem);
+  const [isRendered, setIsRendered] = useState(isVisible);
 
   useEffect(() => {
     if (isVisible) {
+      setIsRendered(true);
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
+      setTimeout(() => setIsRendered(false), 300); // Wait for animation to finish
     }
-
-    // Cleanup function to ensure overflow is reset when component unmounts
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
-  }, [isVisible]); // Dependency on isVisible to re-apply effect when visibility changes
+  }, [isVisible]);
+
+  useEffect(() => {
+    setCurrentSelectedItem(selectedItem); // Update currentSelectedItem when selectedItem changes
+  }, [selectedItem]);
 
   const onItemSelect = (item) => {
-    setcurrentSelectedItem(item);
+    setCurrentSelectedItem(item);
   };
+
+  const handleReset = () => {
+    setCurrentSelectedItem(null);
+    onSubmit({
+      filterName: filterName,
+      value: null,
+    });
+  };
+
+  const handleSubmit = () => {
+    onSubmit({
+      filterName: filterName,
+      value: currentSelectedItem,
+    });
+  };
+
+  if (!isRendered && !isVisible) return null;
+
   return (
-    <>
-      {isVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end  z-50">
-          <div className="bg-white p-4 rounded-t-3xl shadow-lg max-w w-full pb-20">
-            <div className="flex flex-col space-y-2">
-              {items.map((item) => (
-                <label key={item} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox"
-                    checked={selectedItem === item}
-                    onChange={() => onItemSelect(item)}
-                  />
-                  <span>{item}</span>
-                </label>
-              ))}
-            </div>
-            <div className="flex justify-between mt-4">
-              <button
-                className="bg-gray-200 text-gray-800 rounded px-4 py-2 hover:bg-gray-300"
-                onClick={() => onReset}
-              >
-                Reset
-              </button>
-              <button
-                className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600"
-                onClick={() => onSubmit(filterName, currentSelectedItem)}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+    <div className="fixed inset-0 z-50 flex justify-center items-end">
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
+          isVisible ? "animate-fadeIn" : "animate-fadeOut"
+        }`}
+      />
+      <div
+        className={`bg-white p-4 rounded-t-3xl max-w w-full pb-12 flex flex-col shadow-upward transition-transform duration-300 ${
+          isVisible
+            ? "translate-y-0 animate-slideUp"
+            : "translate-y-full animate-slideDown"
+        }`}
+      >
+        <h1 className="text-result-heading text-center">{filterDisplayName}</h1>
+        <hr className="my-2 border-t-2 border-lightGrayLines" />
+
+        {React.cloneElement(children, {
+          currentSelectedItem: currentSelectedItem,
+          onItemSelect: onItemSelect,
+        })}
+
+        <hr className="my-2 mb-5 border-t-2 border-lightGrayLines" />
+        <div className="flex flex-col w-full">
+          <MainButton text={submitButtonText} onClick={handleSubmit} />
+          <SecondaryButton text={cancleButtonText} onClick={handleReset} />
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-export default FilterPopUpMenue;
+export default FilterPopUpMenu;

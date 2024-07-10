@@ -11,7 +11,7 @@ export default function MealCatButton({
     <button
       key={category.id}
       className={`flex flex-col items-center mx-2 focus:outline-none p-2 ${
-        isSelected ? "button-pressed shadow-md rounded-3xl " : ""
+        isSelected ? "filterButton-pressed shadow-md rounded-3xl " : ""
       }`}
       style={{ width: width }}
       onClick={() => onBtnClick(category.title)}
@@ -30,9 +30,9 @@ export default function MealCatButton({
         }}
       />
       <div
-        className={`text-center mt-1 text-xs ${
+        className={`text-center mt-1 text-small-icon-sub-heading ${
           isSelected
-            ? "text-customButtonSelectedText font-medium"
+            ? "text-customButtonSelectedText font-bold-icon-sub-heading"
             : "text-black"
         }`}
       >
