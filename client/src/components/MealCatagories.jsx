@@ -1,9 +1,9 @@
 import React from "react";
-import SideDishesIcon from "../Images/Icons/side_dish.png";
-import DrinksIcon from "../Images/Icons/drinks.png";
-import DessertsIcon from "../Images/Icons/desert.png";
-import MainCoursesIcon from "../Images/Icons/main_meal.png";
-import AppetizersIcon from "../Images/Icons/apetizer.png";
+import SideDishesIcon from "../../assets/Icons/side_dish.png";
+import DrinksIcon from "../../assets/Icons/drinks.png";
+import DessertsIcon from "../../assets/Icons/desert.png";
+import MainCoursesIcon from "../../assets/Icons/main_meal.png";
+import AppetizersIcon from "../../assets/Icons/apetizer.png";
 import MealCatButton from "./MealCatButton";
 
 const categories = [

@@ -10,11 +10,12 @@ import { FiHome } from "react-icons/fi";
 import { PiCallBellLight } from "react-icons/pi";
 import { PiNoteLight } from "react-icons/pi";
 import NavBarButton from "./components/NavbarButton.jsx";
+import Login from "./pages/Login.jsx";
 
 export default function App() {
   return (
     <div className="bg-customBackground min-h-screen">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,7 +27,8 @@ export default function App() {
           <NavBarButton to="/alerts" icon={PiCallBellLight} position="middle" />
           <NavBarButton to="/notes" icon={PiNoteLight} position="right" />
         </BottomNavBar>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <Login />
     </div>
   );
 }
