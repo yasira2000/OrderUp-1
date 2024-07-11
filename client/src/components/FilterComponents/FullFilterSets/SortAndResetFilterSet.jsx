@@ -3,7 +3,7 @@ import FilterButtonPushDown from "../FilterButtonPushDown";
 import FilterButtonPopUp from "../FilterButtonPopUp";
 import FilterPopUpMenue from "../FilterPopUpMenue";
 
-import ButtonSelectionDotGrp from "../../ButtonSelectionDotGrp";
+import ButtonSelectionDotGrp from "../../InputComps/ButtonSelectionDotGrp";
 
 export default function SortAndResetFilterSet({
   resetFilters,

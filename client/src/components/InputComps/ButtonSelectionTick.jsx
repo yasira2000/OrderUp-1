@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/CustomStylePresets.css";
-import { GrRadial, GrRadialSelected } from "react-icons/gr";
+import "../../styles/CustomStylePresets.css";
+import { IoIosCheckbox, IoIosCheckboxOutline } from "react-icons/io";
 
-function ButtonSelectionDot({
+function ButtonSelectionTick({
   buttonDisplayName,
   buttonValue,
   onPushdownButtonChange,
@@ -25,9 +25,9 @@ function ButtonSelectionDot({
           onClick={handleClick}
         >
           {buttonState ? (
-            <GrRadialSelected size={24} />
+            <IoIosCheckbox size={24} />
           ) : (
-            <GrRadial size={24} />
+            <IoIosCheckboxOutline size={24} />
           )}
         </button>
       </div>
@@ -36,4 +36,4 @@ function ButtonSelectionDot({
   );
 }
 
-export default ButtonSelectionDot;
+export default ButtonSelectionTick;

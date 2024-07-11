@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/CustomStylePresets.css"; // Adjust the path as necessary
+import "../../styles/CustomStylePresets.css"; // Adjust the path as necessary
 
 const SnappingSlider = ({ values, onItemSelect, currentSelectedItem }) => {
   const [index, setIndex] = useState(() => {

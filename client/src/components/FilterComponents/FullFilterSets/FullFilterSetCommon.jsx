@@ -4,11 +4,14 @@ import FilterButtonPushDown from "../FilterButtonPushDown";
 import FilterButtonPopUp from "../FilterButtonPopUp";
 import FilterPopUpMenue from "../FilterPopUpMenue";
 
-import ButtonPushDownGroup from "../../ButtonPushDownGroup";
-import ButtonSelectionDotGrp from "../../ButtonSelectionDotGrp";
-import SnappingSlider from "../../SnappingSlider";
+import ButtonPushDownGroup from "../../InputComps/ButtonPushDownGroup";
+import ButtonSelectionDotGrp from "../../InputComps/ButtonSelectionDotGrp";
+import SnappingSlider from "../../InputComps/SnappingSlider";
 
-export default function FullFilterSet({ onFilterUpdate, appliedFilters }) {
+export default function FullFilterSetCommon({
+  onFilterUpdate,
+  appliedFilters,
+}) {
   const [filters, setFilters] = useState(appliedFilters);
   const [isPopUpVisible, setIsPopUpVisible] = useState({});
 

@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import MealCategories from "../components/MealCatagories";
-import FilterSet from "../components/FilterComponents/FilterSet";
-import FilterButtonPushDown from "../components/FilterComponents/FilterButtonPushDown";
-import FilterButtonPopUp from "../components/FilterComponents/FilterButtonPopUp";
-import FilterPopUpMenue from "../components/FilterComponents/FilterPopUpMenue";
-import ButtonPushDownGroup from "../components/ButtonPushDownGroup";
-import ButtonSelectionDotGrp from "../components/ButtonSelectionDotGrp";
-import SnappingSlider from "../components/SnappingSlider";
-import FullFilterSet from "../components/FilterComponents/FullFilterSets/FullFilterSet";
+import FullFilterSetCommon from "../components/FilterComponents/FullFilterSets/FullFilterSetCommon";
 import SortAndResetFilterSet from "../components/FilterComponents/FullFilterSets/SortAndResetFilterSet";
+import ButtonSelectionTick from "../components/InputComps/ButtonSelectionTick";
+import FullFilterSetMainCourse from "../components/FilterComponents/FullFilterSets/FullFilterSetMainCourse";
 
 export default function Home() {
   const mealTypes = [
@@ -61,18 +56,37 @@ export default function Home() {
       (value) => value !== null && value !== false
     );
 
-    // Check specifically if the category field is not null and exists
-    const isCategoryNotNull = filters.category && filters.category !== null;
+    // // Check specifically if the category field is not null and exists
+    // const isCategoryNotNull = filters.category && filters.category !== null;
 
     console.log("filters", filters);
     hasActiveFilters
       ? setIsFilterVisible(true)
       : setTimeout(() => setIsFilterVisible(false), 500);
 
-    isCategoryNotNull
-      ? setIsCatagorySelected(true)
-      : setIsCatagorySelected(false);
+    // isCategoryNotNull
+    //   ? setIsCatagorySelected(true)
+    //   : setTimeout(() => setIsCatagorySelected(false), 500);
   }, [filters]);
+
+  const [catSelDelayed, setCatSelDelayed] = useState({});
+
+  const catatgoryUpdate = (categoryFilter) => {
+    if (
+      categoryFilter.category !== null &&
+      categoryFilter.category !== undefined
+    ) {
+      setIsCatagorySelected(true);
+      filterUpdate(categoryFilter);
+      setCatSelDelayed(categoryFilter);
+    } else {
+      setIsCatagorySelected(false);
+      filterUpdate(categoryFilter);
+      setTimeout(() => {
+        setCatSelDelayed(categoryFilter);
+      }, 500);
+    }
+  };
 
   return (
     <div>
@@ -83,20 +97,22 @@ export default function Home() {
       />
       <MealCategories
         iconTitles={mealTypes}
-        onCategoryClick={filterUpdate}
+        onCategoryClick={catatgoryUpdate}
         selectedCat={filters.category}
       />
 
-      <FullFilterSet onFilterUpdate={filterUpdate} appliedFilters={filters} />
+      <FullFilterSetCommon
+        onFilterUpdate={filterUpdate}
+        appliedFilters={filters}
+      />
+
       <div
         className={`transition-all duration-500 overflow-hidden ${
-          isCatagorySelected ? "max-h-40" : "max-h-0"
+          filters.category && filters.category !== null ? "max-h-40" : "max-h-0"
         }`}
       >
-        {(filters.category === "Side Dishes"
-          ? true
-          : setTimeout(() => false, 500)) && (
-          <FullFilterSet
+        {catSelDelayed.category === "Main Courses" && (
+          <FullFilterSetMainCourse
             onFilterUpdate={filterUpdate}
             appliedFilters={filters}
           />
