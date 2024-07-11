@@ -22,10 +22,10 @@ const MealCategories = ({ iconTitles, onCategoryClick, selectedCat }) => {
 
   const handleCategoryClick = (categoryTitle) => {
     if (selectedCat === categoryTitle) {
-      onCategoryClick({ filterName: "category", value: null });
+      onCategoryClick({ category: null });
       return;
     } else {
-      onCategoryClick({ filterName: "category", value: categoryTitle });
+      onCategoryClick({ category: categoryTitle });
     }
   };
 

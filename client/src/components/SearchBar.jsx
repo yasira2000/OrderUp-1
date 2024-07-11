@@ -6,7 +6,7 @@ export default function SearchBar({ onSubmit, newSearchValue }) {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    onSubmit({ filterName: "search", value: searchValue }); // Call the onSubmit prop function with the search value
+    onSubmit({ search: searchValue }); // Call the onSubmit prop function with the search value
   };
 
   useEffect(() => {

@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import "../styles/CustomStylePresets.css"; // Adjust the path as necessary
 
 const SnappingSlider = ({ values, onItemSelect, currentSelectedItem }) => {
-  const [index, setIndex] = useState(
-    currentSelectedItem !== null
-      ? values.indexOf(currentSelectedItem)
-      : values.length - 2
-  );
+  const [index, setIndex] = useState(() => {
+    // Check if currentSelectedItem is null or undefined
+    if (currentSelectedItem !== null && currentSelectedItem !== undefined) {
+      return values.indexOf(currentSelectedItem);
+    } else {
+      return values.length - 2; // Default value when currentSelectedItem is null
+    }
+  });
 
   useEffect(() => {
     // Check if onItemSelect is a function before calling it
