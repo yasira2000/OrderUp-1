@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineBell } from "react-icons/ai";
-import TempLogo from "../Images/Temp-Logo-Order-Up.png";
+import TempLogo from "../../assets/Icons/Temp-Logo-Order-Up.png";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {

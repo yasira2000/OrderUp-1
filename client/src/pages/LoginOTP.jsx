@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "../../assets/Icons/Logo-Order-Up.png";
+import logo from "../../assets/Icons/Temp-Logo-Order-Up.png";
 
 import InputField from "../components/InputField";
 
