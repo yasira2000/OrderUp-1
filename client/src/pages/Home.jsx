@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import MealCategories from "../components/MealCatagories";
-import FilterSet from "../components/FilterSet";
-import FilterButtonPushDown from "../components/FilterButtonPushDown";
-import FilterButtonPopUp from "../components/FilterButtonPopUp";
-import FilterPopUpMenue from "../components/FilterPopUpMenue";
+import FilterSet from "../components/FilterComponents/FilterSet";
+import FilterButtonPushDown from "../components/FilterComponents/FilterButtonPushDown";
+import FilterButtonPopUp from "../components/FilterComponents/FilterButtonPopUp";
+import FilterPopUpMenue from "../components/FilterComponents/FilterPopUpMenue";
 import ButtonPushDownGroup from "../components/ButtonPushDownGroup";
 import ButtonSelectionDotGrp from "../components/ButtonSelectionDotGrp";
-import { Rating } from "flowbite-react";
 import SnappingSlider from "../components/SnappingSlider";
+import FullFilterSet from "../components/FilterComponents/FullFilterSets/FullFilterSet";
+import SortAndResetFilterSet from "../components/FilterComponents/FullFilterSets/SortAndResetFilterSet";
 
 export default function Home() {
   const mealTypes = [
@@ -19,60 +20,39 @@ export default function Home() {
     "Starter",
   ];
 
-  const getDefaultFilters = () => ({
-    search: null,
-    category: null,
-    sort: null,
-    inStock: false,
-    maxPrice: null,
-    time: null,
-    rating: null,
-    // Add more filters as needed
-  });
-
-  const [filters, setFilters] = useState(getDefaultFilters);
-  const [isPopUpVisible, setIsPopUpVisible] = useState({
-    sort: false,
-    maxPrice: false,
-  });
+  const [filters, setFilters] = useState({});
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   const [isCatagorySelected, setIsCatagorySelected] = useState(false);
 
   const resetFilters = () => {
-    setFilters(getDefaultFilters());
+    setFilters({});
   };
 
-  const handleSingleValFilters = ({ filterName, value }) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterName]: value,
-    }));
+  const removeNullFields = (obj) => {
+    const cleanedObj = {};
+    for (const key in obj) {
+      if (obj[key] !== null) {
+        cleanedObj[key] = obj[key];
+      }
+    }
+    return cleanedObj;
   };
 
-  const handleSingleValPopupFilters = ({ filterName, value }) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterName]: value,
-    }));
-    setIsPopUpVisible((prevVisible) => ({
-      ...prevVisible,
-      [filterName]: false,
-    }));
-  };
+  const filterUpdate = (newFilters) => {
+    // Combine previous filters with new filters
+    const updatedFilters = {
+      ...filters,
+      ...newFilters,
+    };
 
-  const enableFilterPopup = ({ filterName }) => {
-    setIsPopUpVisible((prevVisible) => ({
-      ...prevVisible,
-      [filterName]: true,
-    }));
-  };
+    // Remove null fields from updated filters
+    const filteredFilters = removeNullFields(updatedFilters);
 
-  const handleToggleFilters = ({ filterName }) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterName]: !prevFilters[filterName],
-    }));
+    // Set the cleaned and updated filters into the filter state
+    setFilters(filteredFilters);
+
+    console.log("updatedFilters", filteredFilters);
   };
 
   useEffect(() => {
@@ -81,90 +61,45 @@ export default function Home() {
       (value) => value !== null && value !== false
     );
 
-    // Check specifically if the category field is null or not
-    const isCategoryNotNull = filters.category !== null;
+    // Check specifically if the category field is not null and exists
+    const isCategoryNotNull = filters.category && filters.category !== null;
 
     console.log("filters", filters);
     hasActiveFilters
       ? setIsFilterVisible(true)
       : setTimeout(() => setIsFilterVisible(false), 500);
+
+    isCategoryNotNull
+      ? setIsCatagorySelected(true)
+      : setIsCatagorySelected(false);
   }, [filters]);
 
   return (
     <div>
       <SearchBar
         key={filters.search} // Add this line
-        onSubmit={handleSingleValFilters}
+        onSubmit={filterUpdate}
         newSearchValue={filters.search ?? ""}
       />
       <MealCategories
         iconTitles={mealTypes}
-        onCategoryClick={handleSingleValFilters}
+        onCategoryClick={filterUpdate}
         selectedCat={filters.category}
       />
-      <FilterSet>
-        <FilterButtonPushDown
-          filterDisplayName="In Stock"
-          filterName="inStock"
-          onPushdownFilterChange={handleToggleFilters}
-          filterValue={filters.inStock}
-        />
-        <FilterButtonPopUp
-          filterDisplayName="Price"
-          filterName="maxPrice"
-          onFilterValueChange={enableFilterPopup}
-          filterValue={filters.maxPrice}
-        />
-        <FilterButtonPopUp
-          filterDisplayName="Time"
-          filterName="time"
-          onFilterValueChange={enableFilterPopup}
-          filterValue={filters.time}
-        />
-        <FilterButtonPopUp
-          filterDisplayName="Rating"
-          filterName="rating"
-          onFilterValueChange={enableFilterPopup}
-          filterValue={filters.rating}
-        />
-      </FilterSet>
 
+      <FullFilterSet onFilterUpdate={filterUpdate} appliedFilters={filters} />
       <div
         className={`transition-all duration-500 overflow-hidden ${
-          Object.values(filters).some(
-            (value) => value !== null && value !== false
-          )
-            ? "max-h-40"
-            : "max-h-0"
+          isCatagorySelected ? "max-h-40" : "max-h-0"
         }`}
       >
-        {filters.category === "Side Dishes" && (
-          <FilterSet>
-            <FilterButtonPushDown
-              filterDisplayName="In Stock"
-              filterName="inStock"
-              onPushdownFilterChange={handleToggleFilters}
-              filterValue={filters.inStock}
-            />
-            <FilterButtonPopUp
-              filterDisplayName="Price"
-              filterName="maxPrice"
-              onFilterValueChange={enableFilterPopup}
-              filterValue={filters.maxPrice}
-            />
-            <FilterButtonPopUp
-              filterDisplayName="Time"
-              filterName="time"
-              onFilterValueChange={enableFilterPopup}
-              filterValue={filters.time}
-            />
-            <FilterButtonPopUp
-              filterDisplayName="Rating"
-              filterName="rating"
-              onFilterValueChange={enableFilterPopup}
-              filterValue={filters.rating}
-            />
-          </FilterSet>
+        {(filters.category === "Side Dishes"
+          ? true
+          : setTimeout(() => false, 500)) && (
+          <FullFilterSet
+            onFilterUpdate={filterUpdate}
+            appliedFilters={filters}
+          />
         )}
       </div>
 
@@ -187,76 +122,14 @@ export default function Home() {
               }{" "}
               Results
             </h2>
-            <div className="flex flex-row px-5 py-2 flex-shrink-0">
-              <div className="px-1">
-                <FilterButtonPushDown
-                  filterDisplayName="Reset"
-                  filterName={null}
-                  onPushdownFilterChange={resetFilters}
-                />
-              </div>
-              <div className="px-1">
-                <FilterButtonPopUp
-                  filterDisplayName="Sort"
-                  filterName="sort"
-                  onFilterValueChange={enableFilterPopup}
-                  filterValue={filters.sort}
-                />
-              </div>
-            </div>
+            <SortAndResetFilterSet
+              resetFilters={resetFilters}
+              onFilterUpdate={filterUpdate}
+              appliedFilters={filters}
+            />
           </div>
         )}
       </div>
-
-      <FilterPopUpMenue
-        filterDisplayName="Price"
-        filterName="maxPrice"
-        isVisible={isPopUpVisible.maxPrice}
-        selectedItem={filters.maxPrice}
-        onSubmit={handleSingleValPopupFilters}
-        submitButtonText="Apply"
-        cancleButtonText="Reset"
-      >
-        <ButtonPushDownGroup items={["$", "$$", "$$$", "$$$$"]} />
-      </FilterPopUpMenue>
-      <FilterPopUpMenue
-        filterDisplayName="Sort"
-        filterName="sort"
-        isVisible={isPopUpVisible.sort}
-        selectedItem={filters.sort}
-        onSubmit={handleSingleValPopupFilters}
-        submitButtonText="Apply"
-        cancleButtonText="Reset"
-      >
-        <ButtonSelectionDotGrp
-          items={["Name", "Category", "Prep-Time", "Price"]}
-        />
-      </FilterPopUpMenue>
-      <FilterPopUpMenue
-        filterDisplayName="Time"
-        filterName="time"
-        isVisible={isPopUpVisible.time}
-        selectedItem={filters.time}
-        onSubmit={handleSingleValPopupFilters}
-        submitButtonText="Apply"
-        cancleButtonText="Reset"
-      >
-        <ButtonPushDownGroup
-          items={["less than 15 min", "15-30 min", "more than 30 min"]}
-        />
-      </FilterPopUpMenue>
-      <FilterPopUpMenue
-        filterDisplayName="Rating"
-        filterName="rating"
-        isVisible={isPopUpVisible.rating}
-        selectedItem={filters.rating}
-        onSubmit={handleSingleValPopupFilters}
-        submitButtonText="Apply"
-        cancleButtonText="Reset"
-      >
-        {/* <ButtonPushDownGroup items={["3+", "3.5+", "4+", "4.5+", "5"]} /> */}
-        <SnappingSlider values={[3, 3.5, 4, 4.5, 5]} />
-      </FilterPopUpMenue>
 
       <div>
         <div className="border rounded-lg p-4 shadow-md m-2 bg-white">
