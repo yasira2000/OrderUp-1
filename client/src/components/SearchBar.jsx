@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 
-export default function SearchBar({ onSubmit, newSearchValue }) {
+export default function SearchBar({
+  onSubmit,
+  newSearchValue,
+  border = false,
+  className = "",
+}) {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -14,13 +19,15 @@ export default function SearchBar({ onSubmit, newSearchValue }) {
   }, [newSearchValue]);
 
   return (
-    <form className="max-w px-4 py-2" onSubmit={handleSubmit}>
+    <form className={`max-w-full ${className}`} onSubmit={handleSubmit}>
       <div className="relative">
         <CiSearch className="absolute inset-y-0 left-4 my-auto text-gray-500 size-5" />
         <input
           type="text"
           placeholder="Search"
-          className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-3xl outline-none bg-gray-50 focus:bg-white focus:border-gra text-icon-sub-heading"
+          className={`w-full py-3 pl-12 pr-4 text-gray-500 border rounded-3xl outline-none bg-gray-50 focus:bg-white focus:border-gra text-icon-sub-heading ${
+            border ? "border border-fadedGray" : ""
+          }`}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)} // Update state on input change
         />

@@ -61,7 +61,7 @@ const FilterPopUpMenu = ({
         }`}
       />
       <div
-        className={`bg-white p-4 rounded-t-3xl max-w w-full pb-12 flex flex-col shadow-upward transition-transform duration-300 ${
+        className={`bg-white p-4 rounded-t-3xl max-w w-full pb-12 flex flex-col shadow-upward transition-transform duration-300 max-h-[90%] ${
           isVisible
             ? "translate-y-0 animate-slideUp"
             : "translate-y-full animate-slideDown"
@@ -70,10 +70,12 @@ const FilterPopUpMenu = ({
         <h1 className="text-result-heading text-center">{filterDisplayName}</h1>
         <hr className="my-2 border-t-2 border-lightGrayLines" />
 
-        {React.cloneElement(children, {
-          currentSelectedItem: currentSelectedItem,
-          onItemSelect: onItemSelect,
-        })}
+        <div className="">
+          {React.cloneElement(children, {
+            currentSelectedItem: currentSelectedItem,
+            onItemSelect: onItemSelect,
+          })}
+        </div>
 
         <hr className="my-2 mb-5 border-t-2 border-lightGrayLines" />
         <div className="flex flex-col w-full">

@@ -8,6 +8,7 @@ import ButtonPushDownGroup from "../../InputComps/ButtonPushDownGroup";
 import ButtonSelectionDotGrp from "../../InputComps/ButtonSelectionDotGrp";
 import SnappingSlider from "../../InputComps/SnappingSlider";
 import ButtonSelectionTickGrp from "../../InputComps/ButtonSelectionTickGrp";
+import ButtonSelectionBoxGrp from "../../InputComps/ButtonSelectionBoxGrp";
 
 export default function FullFilterSetMainCourse({
   onFilterUpdate,
@@ -76,12 +77,23 @@ export default function FullFilterSetMainCourse({
           onFilterValueChange={enableFilterPopup}
           filterValue={filters.cuisine}
         />
-
         <FilterButtonPopUp
           filterDisplayName="Portion"
           filterName="portion"
           onFilterValueChange={enableFilterPopup}
           filterValue={filters.portion}
+        />
+        <FilterButtonPopUp
+          filterDisplayName="Include"
+          filterName="include"
+          onFilterValueChange={enableFilterPopup}
+          filterValue={filters.include}
+        />
+        <FilterButtonPopUp
+          filterDisplayName="Exclude"
+          filterName="exclude"
+          onFilterValueChange={enableFilterPopup}
+          filterValue={filters.exclude}
         />
       </FilterSet>
 
@@ -158,6 +170,138 @@ export default function FullFilterSetMainCourse({
       >
         <ButtonSelectionDotGrp
           items={["Single", "Couples Pac", "3 person", "Savan"]}
+        />
+      </FilterPopUpMenue>
+
+      <FilterPopUpMenue
+        filterDisplayName="Include"
+        filterName="include"
+        isVisible={isPopUpVisible.include}
+        selectedItem={filters.include}
+        onSubmit={handleSingleValPopupFilters}
+        submitButtonText="Apply"
+        cancleButtonText="Reset"
+      >
+        <ButtonSelectionBoxGrp
+          items={[
+            "Tomato",
+            "Onion",
+            "Cheese",
+            "Lettuce",
+            "Bread",
+            "Chicken",
+            "Egg",
+            "Potato",
+            "Mushroom",
+            "Rice",
+            "Beans",
+            "Spinach",
+            "Pasta",
+            "Carrot",
+            "Bell Pepper",
+            "Broccoli",
+            "Cucumber",
+            "Garlic",
+            "Avocado",
+            "Corn",
+            "Zucchini",
+            "Celery",
+            "Apple",
+            "Orange",
+            "Banana",
+            "Pineapple",
+            "Strawberry",
+            "Blueberry",
+            "Raspberry",
+            "Grapes",
+            "Watermelon",
+            "Peach",
+            "Plum",
+            "Cherry",
+            "Melon",
+            "Kiwi",
+            "Pear",
+            "Pomegranate",
+            "Mango",
+            "Papaya",
+            "Guava",
+            "Fig",
+            "Date",
+            "Lemon",
+            "Lime",
+            "Coconut",
+            "Almonds",
+            "Walnuts",
+            "Cashews",
+            "Peanuts",
+            "Pistachios",
+          ]}
+        />
+      </FilterPopUpMenue>
+
+      <FilterPopUpMenue
+        filterDisplayName="Exclude"
+        filterName="exclude"
+        isVisible={isPopUpVisible.exclude}
+        selectedItem={filters.exclude}
+        onSubmit={handleSingleValPopupFilters}
+        submitButtonText="Apply"
+        cancleButtonText="Reset"
+      >
+        <ButtonSelectionBoxGrp
+          items={[
+            "Tomato",
+            "Onion",
+            "Cheese",
+            "Lettuce",
+            "Bread",
+            "Chicken",
+            "Egg",
+            "Potato",
+            "Mushroom",
+            "Rice",
+            "Beans",
+            "Spinach",
+            "Pasta",
+            "Carrot",
+            "Bell Pepper",
+            "Broccoli",
+            "Cucumber",
+            "Garlic",
+            "Avocado",
+            "Corn",
+            "Zucchini",
+            "Celery",
+            "Apple",
+            "Orange",
+            "Banana",
+            "Pineapple",
+            "Strawberry",
+            "Blueberry",
+            "Raspberry",
+            "Grapes",
+            "Watermelon",
+            "Peach",
+            "Plum",
+            "Cherry",
+            "Melon",
+            "Kiwi",
+            "Pear",
+            "Pomegranate",
+            "Mango",
+            "Papaya",
+            "Guava",
+            "Fig",
+            "Date",
+            "Lemon",
+            "Lime",
+            "Coconut",
+            "Almonds",
+            "Walnuts",
+            "Cashews",
+            "Peanuts",
+            "Pistachios",
+          ]}
         />
       </FilterPopUpMenue>
     </div>

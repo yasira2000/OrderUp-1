@@ -94,6 +94,7 @@ export default function Home() {
         key={filters.search} // Add this line
         onSubmit={filterUpdate}
         newSearchValue={filters.search ?? ""}
+        className="w-full pb-5 pt-2 px-7"
       />
       <MealCategories
         iconTitles={mealTypes}
