@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/Icons/Logo-Order-Up.png";
 
 import InputField from "../components/InputField";
@@ -25,7 +26,7 @@ const Login = () => {
         <hr className="w-full h-1 mt-4 mb-4" />
         <div className="flex flex-col w-full items-center">
           <button className="bg-[#F09C67] w-full h-8 rounded-full font-extralight text-white text-opacity-80 text-sm font-inter">
-            Sign in / Sign up
+            <Link to="otp">Sign in / Sign up</Link>
           </button>
           <p className="flex mt-6 text-[10px] text-[#F09C67] font-inter font-extralight self-center text-opacity-80">
             Only View the Menu
