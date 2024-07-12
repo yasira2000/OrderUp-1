@@ -11,7 +11,12 @@ import { FiHome } from "react-icons/fi";
 import { PiCallBellLight } from "react-icons/pi";
 import { PiNoteLight } from "react-icons/pi";
 import HomePageFoodCard from "../components/Cards/HomePageFoodCard";
-import foodImage from "../../assets/Images/food01.jpg";
+import foodImage1 from "../../assets/Images/food01.jpg";
+import foodImage2 from "../../assets/Images/food02.jpg";
+import foodImage3 from "../../assets/Images/food03.jpg";
+import foodImage4 from "../../assets/Images/food04.jpg";
+
+import HorizontalScrollableList from "../components/Cards/HorrizontalFoodCardScroller";
 
 export default function Home() {
   const mealTypes = [
@@ -20,6 +25,44 @@ export default function Home() {
     "Desserts",
     "Main Courses",
     "Starter",
+  ];
+
+  const foodItemList = [
+    {
+      name: "Pizza Margherita",
+      price: "$10",
+      rating: "4.5",
+      image: foodImage1, // Assuming foodImage is imported or defined elsewhere
+      prepTime: "30 mins",
+    },
+    {
+      name: "Chicken Alfredo Pasta",
+      price: "$20",
+      rating: "4.0",
+      image: foodImage2,
+      prepTime: "45 mins",
+    },
+    {
+      name: "Caesar Salad",
+      price: "$15",
+      rating: "4.2",
+      image: foodImage3,
+      prepTime: "15 mins",
+    },
+    {
+      name: "Chocolate Cake",
+      price: "$25",
+      rating: "4.8",
+      image: foodImage4,
+      prepTime: "1 hr",
+    },
+    {
+      name: "Sushi Platter",
+      price: "$30",
+      rating: "4.6",
+      image: foodImage1,
+      prepTime: "1 hr 30 mins",
+    },
   ];
 
   const [commonFilters, setCommonFilters] = useState({});
@@ -126,13 +169,15 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div>
-        <SearchBar
-          key={commonFilters.search} // Add this line
-          onSubmit={filterUpdate}
-          newSearchValue={commonFilters.search ?? ""}
-          className="w-full pb-5 pt-2 px-7"
-        />
+      <div className="pb-20">
+        <div className="sticky top-16 z-50 pt-4 bg-customBackground">
+          <SearchBar
+            key={commonFilters.search} // Add this line
+            onSubmit={filterUpdate}
+            newSearchValue={commonFilters.search ?? ""}
+            className="w-full pb-5 pt-2 px-7"
+          />
+        </div>
         <MealCategories
           iconTitles={mealTypes}
           onCategoryClick={catatgoryUpdate}
@@ -198,7 +243,7 @@ export default function Home() {
         >
           {isFilterVisible && (
             <div className=" flex flex-row justify-between items-center">
-              <h2 className="text-icon-sub-heading px-5 py-2 flex-shrink-0">
+              <h2 className="text-icon-sub-heading px-8 py-2 flex-shrink-0">
                 {
                   Object.values(commonFilters).filter(
                     (value) => value !== null && value !== false
@@ -216,12 +261,25 @@ export default function Home() {
         </div>
 
         <div>
-          <HomePageFoodCard
-            name="Delicious Food"
-            price="$12.99"
-            rating="4.5"
-            image={foodImage}
-            prepTime="30 mins"
+          <HorizontalScrollableList
+            heading={"Starter"}
+            foodItemList={foodItemList}
+          />
+          <HorizontalScrollableList
+            heading={"Main Courses"}
+            foodItemList={foodItemList}
+          />
+          <HorizontalScrollableList
+            heading={"Dessert"}
+            foodItemList={foodItemList}
+          />
+          <HorizontalScrollableList
+            heading={"Drinks"}
+            foodItemList={foodItemList}
+          />
+          <HorizontalScrollableList
+            heading={"Side Dishes"}
+            foodItemList={foodItemList}
           />
         </div>
       </div>

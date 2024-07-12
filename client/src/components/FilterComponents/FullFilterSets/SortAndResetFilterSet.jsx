@@ -47,7 +47,7 @@ export default function SortAndResetFilterSet({
 
   return (
     <div>
-      <div className="flex flex-row px-5 py-2 flex-shrink-0">
+      <div className="flex flex-row px-8 py-2 flex-shrink-0">
         <div className="px-1">
           <FilterButtonPushDown
             filterDisplayName="Reset"
