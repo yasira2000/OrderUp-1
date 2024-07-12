@@ -20,6 +20,16 @@
   [&::-webkit-slider-thumb]:bg-customButtonSelected;
 } */
 
+.scrollbar-hide {
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
 .slider {
   @apply appearance-none w-full h-0.5 bg-transparent outline-none;
 }
