@@ -22,7 +22,7 @@ const NavBarButton = ({ to, icon: Icon, position }) => {
       }
       style={({ isActive }) => ({
         width: "48px",
-        height: isActive ? "64px" : "60px",
+        height: isActive ? "69px" : "65px",
         transition: "height 0.2s ease-in-out",
         boxShadow:
           "0 -4px 9px -1px rgba(0, 0, 0, 0.1), 0 -2px 10px -1px rgba(0, 0, 0, 0.06)", // Custom shadow casting upwards

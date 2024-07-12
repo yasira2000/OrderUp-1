@@ -5,11 +5,7 @@ import FullFilterSetCommon from "../components/FilterComponents/FullFilterSets/F
 import SortAndResetFilterSet from "../components/FilterComponents/FullFilterSets/SortAndResetFilterSet";
 import FullFilterSetMainCourse from "../components/FilterComponents/FullFilterSets/FullFilterSetMainCourse";
 import Header from "../components/Header";
-import BottomNavBar from "../components/BottomNavBar";
-import NavBarButton from "../components/NavbarButton";
-import { FiHome } from "react-icons/fi";
-import { PiCallBellLight } from "react-icons/pi";
-import { PiNoteLight } from "react-icons/pi";
+
 import HomePageFoodCard from "../components/Cards/HomePageFoodCard";
 import foodImage1 from "../../assets/Images/food01.jpg";
 import foodImage2 from "../../assets/Images/food02.jpg";
@@ -18,6 +14,10 @@ import foodImage4 from "../../assets/Images/food04.jpg";
 
 import HorizontalScrollableList from "../components/Cards/HorrizontalFoodCardScroller";
 import HomePageFoodCardGrid from "../components/Cards/HomePageFoodCardGrid";
+import NavBarButton_Button from "../components/NavBarButton_Button";
+import FilterPopUpMenu from "../components/FilterComponents/FilterPopUpMenue";
+
+import CustomerNavBar from "../components/CustomerNavBar";
 
 export default function Home() {
   const mealTypes = [
@@ -87,6 +87,7 @@ export default function Home() {
     setCommonFilters({});
     setCatfilters({});
     setFullFilters({});
+    setCatSel(false);
   };
 
   const removeNullFields = (obj) => {
@@ -294,11 +295,8 @@ export default function Home() {
           </div>
         )}
       </div>
-      <BottomNavBar>
-        <NavBarButton to="/" icon={FiHome} position="left" />
-        <NavBarButton to="/alerts" icon={PiCallBellLight} position="middle" />
-        <NavBarButton to="/notes" icon={PiNoteLight} position="right" />
-      </BottomNavBar>
+
+      <CustomerNavBar />
     </div>
   );
 }
