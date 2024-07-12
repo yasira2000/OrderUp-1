@@ -1,8 +1,16 @@
 import React from "react";
 
-const HomePageFoodCard = ({ name, price, rating, image, prepTime }) => {
+const HomePageFoodCard = ({
+  name,
+  price,
+  rating,
+  image,
+  prepTime,
+  height,
+  width,
+}) => {
   return (
-    <div className="relative w-[135px] h-[260px]">
+    <div className={`relative w-[${width}px] h-[${height}px]`}>
       <div className="w-full h-full bg-white rounded-[25px] overflow-hidden">
         <img
           className="w-full h-[60%] object-cover rounded-t-[25px]"

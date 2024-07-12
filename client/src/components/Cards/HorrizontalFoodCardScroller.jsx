@@ -6,7 +6,7 @@ const HorizontalScrollableList = ({ heading, foodItemList }) => {
     <div>
       <h1 className="text-result-heading px-8 pb-4 pt-2">{heading}</h1>
       <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex py-2 px-6">
+        <div className="flex py-2 px-0">
           {foodItemList.map((foodItem, index) => (
             <div key={index} className="flex-none px-2">
               <HomePageFoodCard
@@ -15,6 +15,8 @@ const HorizontalScrollableList = ({ heading, foodItemList }) => {
                 rating={foodItem.rating}
                 image={foodItem.image}
                 prepTime={foodItem.prepTime}
+                height={260}
+                width={135}
               />
             </div>
           ))}

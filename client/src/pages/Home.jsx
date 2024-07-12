@@ -17,6 +17,7 @@ import foodImage3 from "../../assets/Images/food03.jpg";
 import foodImage4 from "../../assets/Images/food04.jpg";
 
 import HorizontalScrollableList from "../components/Cards/HorrizontalFoodCardScroller";
+import HomePageFoodCardGrid from "../components/Cards/HomePageFoodCardGrid";
 
 export default function Home() {
   const mealTypes = [
@@ -134,7 +135,7 @@ export default function Home() {
   }, [commonFilters]);
 
   const [catSelDelayed, setCatSelDelayed] = useState({});
-
+  const [catSel, setCatSel] = useState(false);
   const catatgoryUpdate = (categoryFilter) => {
     if (
       categoryFilter.category !== null &&
@@ -143,9 +144,11 @@ export default function Home() {
       setCatfilters({});
       filterUpdate(categoryFilter);
       setCatSelDelayed(categoryFilter);
+      setCatSel(true);
     } else {
       setCatfilters({});
       filterUpdate(categoryFilter);
+      setCatSel(false);
       setTimeout(() => {
         setCatSelDelayed(categoryFilter);
       }, 500);
@@ -191,9 +194,7 @@ export default function Home() {
 
         <div
           className={`transition-all duration-500 overflow-hidden ${
-            commonFilters.category && commonFilters.category !== null
-              ? "max-h-40"
-              : "max-h-0"
+            catSel ? "max-h-40" : "max-h-0"
           }`}
         >
           {catSelDelayed.category === "Main Courses" && (
@@ -260,28 +261,38 @@ export default function Home() {
           )}
         </div>
 
-        <div>
-          <HorizontalScrollableList
-            heading={"Starter"}
-            foodItemList={foodItemList}
-          />
-          <HorizontalScrollableList
-            heading={"Main Courses"}
-            foodItemList={foodItemList}
-          />
-          <HorizontalScrollableList
-            heading={"Dessert"}
-            foodItemList={foodItemList}
-          />
-          <HorizontalScrollableList
-            heading={"Drinks"}
-            foodItemList={foodItemList}
-          />
-          <HorizontalScrollableList
-            heading={"Side Dishes"}
-            foodItemList={foodItemList}
-          />
-        </div>
+        {!catSel && (
+          <div>
+            <HorizontalScrollableList
+              heading={"Starter"}
+              foodItemList={foodItemList}
+            />
+            <HorizontalScrollableList
+              heading={"Main Courses"}
+              foodItemList={foodItemList}
+            />
+            <HorizontalScrollableList
+              heading={"Dessert"}
+              foodItemList={foodItemList}
+            />
+            <HorizontalScrollableList
+              heading={"Drinks"}
+              foodItemList={foodItemList}
+            />
+            <HorizontalScrollableList
+              heading={"Side Dishes"}
+              foodItemList={foodItemList}
+            />
+          </div>
+        )}
+        {catSel && (
+          <div>
+            <HomePageFoodCardGrid
+              heading={catSelDelayed.category}
+              foodItemList={foodItemList}
+            />
+          </div>
+        )}
       </div>
       <BottomNavBar>
         <NavBarButton to="/" icon={FiHome} position="left" />
