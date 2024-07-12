@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif']
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
         customBackground: "#ECE6E3",
@@ -45,10 +45,10 @@ module.exports = {
       },
       fontSize: {
         "result-heading": "22px", // Result Headings: 20px
-        "icon-sub-heading": "17px", // Icon Sub Headings: 15px
+        "icon-sub-heading": "15px", // Icon Sub Headings: 15px
         "small-icon-sub-heading": "12px", // Small Icon Sub Headings: 10px
-        "bold-icon-sub-heading": "14px", // Bold Icon Sub Heading: 12px
-        "mid-size": "14px", // Mid Size: 12px
+        "bold-icon-sub-heading": "13px", // Bold Icon Sub Heading: 12px
+        "mid-size": "13px", // Mid Size: 12px
       },
       fontWeight: {
         "bold-icon-sub-heading": "bold", // Bold Icon Sub Heading: Bold

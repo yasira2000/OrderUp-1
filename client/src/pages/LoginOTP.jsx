@@ -16,15 +16,16 @@ const LoginOTP = () => {
           />
         </div>
         <p className="font-inter mt-2 font-light">Sign up</p>
-              <div className="flex justify-start mt-5">  
-                  <p className="text-[10px] text-[#848484] text-opacity-80 font-inter font-light">Enter the OTP sent to your email or phone number to verify your account</p>
-                  
-              </div>
-              <hr className="w-full h-1 mt-4 mb-4" />
+        <div className="flex justify-start mt-5">
+          <p className="text-[10px] text-[#848484] text-opacity-80 font-inter font-light">
+            Enter the OTP sent to your email or phone number to verify your
+            account
+          </p>
+        </div>
+        <hr className="w-full h-1 mt-4 mb-4" />
         <div className="flex-col w-full">
           <p className="text-[10px] font-w font-light">OTP</p>
           <InputField text="Enter the OTP" />
-          
         </div>
         <hr className="w-full h-1 mt-5 mb-4" />
         <div className="flex flex-col w-full items-center">
