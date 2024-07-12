@@ -12,24 +12,26 @@ import { PiNoteLight } from "react-icons/pi";
 import NavBarButton from "./components/NavbarButton.jsx";
 import Login from "./pages/Login.jsx";
 import LoginOTP from "./pages/LoginOTP.jsx";
+import FoodItem from "./pages/FoodItem.jsx";
 
 export default function App() {
   return (
     <div className="bg-customBackground min-h-screen">
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/otp" element={<LoginOTP />} />
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/food-item" element={<FoodItem />} />
         </Routes>
-        <BottomNavBar>
+        {/* <BottomNavBar>
           <NavBarButton to="/" icon={FiHome} position="left" />
           <NavBarButton to="/alerts" icon={PiCallBellLight} position="middle" />
           <NavBarButton to="/notes" icon={PiNoteLight} position="right" />
-        </BottomNavBar>
+        </BottomNavBar> */}
       </BrowserRouter>
       
     </div>
