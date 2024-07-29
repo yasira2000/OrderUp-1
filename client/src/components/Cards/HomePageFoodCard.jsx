@@ -10,7 +10,10 @@ const HomePageFoodCard = ({
   width,
 }) => {
   return (
-    <div className={`relative w-[${width}px] h-[${height}px]`}>
+    <div
+      className="relative"
+      style={{ width: `${width}px`, height: `${height}px` }}
+    >
       <div className="w-full h-full bg-white rounded-[25px] overflow-hidden">
         <img
           className="w-full h-[60%] object-cover rounded-t-[25px]"
@@ -19,7 +22,7 @@ const HomePageFoodCard = ({
         />
         <div className="p-2 pb-5 flex flex-col justify-between">
           <div className="text-icon-sub-heading line-clamp-2 pb-1">{name}</div>
-          <div className="flex  justify-between text-small-icon-sub-heading ">
+          <div className="flex justify-between text-small-icon-sub-heading">
             <span>{prepTime}</span>
             <span>{rating}</span>
           </div>

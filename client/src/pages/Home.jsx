@@ -256,7 +256,7 @@ export default function Home() {
               <SortAndResetFilterSet
                 resetFilters={resetFilters}
                 onFilterUpdate={filterUpdate}
-                appliedFilters={commonFilters}
+                sortFilter={commonFilters}
               />
             </div>
           )}
