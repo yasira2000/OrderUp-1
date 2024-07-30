@@ -9,6 +9,7 @@ export default function SortAndResetFilterSet({
   resetFilters,
   onFilterUpdate,
   sortFilter,
+  sortItemList,
 }) {
   const [filters, setFilters] = useState(sortFilter);
   const [isPopUpVisible, setIsPopUpVisible] = useState({});
@@ -74,9 +75,7 @@ export default function SortAndResetFilterSet({
         submitButtonText="Apply"
         cancleButtonText="Reset"
       >
-        <ButtonSelectionDotGrp
-          items={["Name", "Category", "Prep-Time", "Price"]}
-        />
+        <ButtonSelectionDotGrp items={sortItemList} />
       </FilterPopUpMenue>
     </div>
   );

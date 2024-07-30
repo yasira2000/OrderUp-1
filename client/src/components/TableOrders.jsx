@@ -4,7 +4,7 @@ import { MainButton } from "./MainButton";
 import OrderPagesFooter from "./OrderPagesFooter";
 import SortAndResetFilterSet from "./FilterComponents/FullFilterSets/SortAndResetFilterSet";
 
-const MyOrders = ({ foodItemList, onAddToTable }) => {
+const TableOrders = ({ foodItemList, onPlaceOrder }) => {
   // State to keep track of counts for each food item by ID
   const initialCounts = foodItemList.reduce((acc, item) => {
     acc[item.id] = item.numberOfItems;
@@ -24,6 +24,7 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
   // Sorting functions
   const sortByName = (a, b) => a.name.localeCompare(b.name);
   const sortByCategory = (a, b) => a.category.localeCompare(b.category);
+  const sortByUserName = (a, b) => a.userName.localeCompare(b.userName);
 
   const sortByPrepTime = (a, b) => {
     const timeToSeconds = (time) => {
@@ -45,6 +46,8 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
         return [...foodItemList].sort(sortByPrepTime);
       case "Price":
         return [...foodItemList].sort(sortByPrice);
+      case "User Name":
+        return [...foodItemList].sort(sortByUserName);
       default:
         return foodItemList;
     }
@@ -82,15 +85,15 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
 
   return (
     <div>
-      <div className=" flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center">
         <h2 className="text-icon-sub-heading px-8 py-2 flex-shrink-0">
-          My Orders
+          Table Orders
         </h2>
         <SortAndResetFilterSet
           resetFilters={resetFilters}
           onFilterUpdate={filterUpdate}
           sortFilter={sortOn}
-          sortItemList={["Name", "Category", "Prep-Time", "Price"]}
+          sortItemList={["Name", "Category", "Prep-Time", "Price", "User Name"]}
         />
       </div>
       <div className="flex flex-col w-full min-h-screen">
@@ -101,7 +104,7 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
                 key={foodItem.id}
                 name={foodItem.name}
                 category={foodItem.category}
-                prepTime={foodItem.prepTime}
+                userName={foodItem.userName}
                 imageSrc={foodItem.imageSrc}
                 price={foodItem.price + " Rs"}
                 count={counts[foodItem.id]}
@@ -114,14 +117,14 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
         </div>
 
         <OrderPagesFooter
-          valName="My Total"
+          valName="Table Total"
           val={`${totalPrice.toFixed(2)} Rs`}
-          buttonName="Add to Table"
-          onButtonPress={onAddToTable}
+          buttonName="Place Order"
+          onButtonPress={onPlaceOrder}
         />
       </div>
     </div>
   );
 };
 
-export default MyOrders;
+export default TableOrders;

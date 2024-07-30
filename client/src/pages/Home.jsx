@@ -257,6 +257,7 @@ export default function Home() {
                 resetFilters={resetFilters}
                 onFilterUpdate={filterUpdate}
                 sortFilter={commonFilters}
+                sortItemList={["Name", "Category", "Prep-Time", "Price"]}
               />
             </div>
           )}
