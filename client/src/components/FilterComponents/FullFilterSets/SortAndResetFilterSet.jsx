@@ -8,9 +8,10 @@ import ButtonSelectionDotGrp from "../../InputComps/ButtonSelectionDotGrp";
 export default function SortAndResetFilterSet({
   resetFilters,
   onFilterUpdate,
-  appliedFilters,
+  sortFilter,
+  sortItemList,
 }) {
-  const [filters, setFilters] = useState(appliedFilters);
+  const [filters, setFilters] = useState(sortFilter);
   const [isPopUpVisible, setIsPopUpVisible] = useState({});
 
   const handleSingleValPopupFilters = ({ filterName, value }) => {
@@ -33,17 +34,17 @@ export default function SortAndResetFilterSet({
 
   useEffect(() => {
     // Only update the parent if filters have changed
-    if (JSON.stringify(filters) !== JSON.stringify(appliedFilters)) {
+    if (JSON.stringify(filters) !== JSON.stringify(sortFilter)) {
       onFilterUpdate(filters);
     }
   }, [filters]);
 
   useEffect(() => {
     // Only update internal state if appliedFilters prop changes
-    if (JSON.stringify(filters) !== JSON.stringify(appliedFilters)) {
-      setFilters(appliedFilters);
+    if (JSON.stringify(filters) !== JSON.stringify(sortFilter)) {
+      setFilters(sortFilter);
     }
-  }, [appliedFilters]);
+  }, [sortFilter]);
 
   return (
     <div>
@@ -74,9 +75,7 @@ export default function SortAndResetFilterSet({
         submitButtonText="Apply"
         cancleButtonText="Reset"
       >
-        <ButtonSelectionDotGrp
-          items={["Name", "Category", "Prep-Time", "Price"]}
-        />
+        <ButtonSelectionDotGrp items={sortItemList} />
       </FilterPopUpMenue>
     </div>
   );

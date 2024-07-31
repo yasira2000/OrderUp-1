@@ -15,6 +15,7 @@ module.exports = {
         primeColor: "#F6E9DC",
         fadedGray: "#ADADAD",
         lightGrayLines: "#DEDEDE",
+        darkGray: "#6E6E6E",
       },
       boxShadow: {
         upward: "0 -4px 6px rgba(0, 0, 0, 0.1)",
