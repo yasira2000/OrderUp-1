@@ -7,11 +7,14 @@ import Login from "./pages/Login.jsx";
 import LoginOTP from "./pages/LoginOTP.jsx";
 import Orders from "./pages/Orders.jsx";
 import FinalizedBill from "./pages/FinalizedBill.jsx";
+import FoodItem from "./pages/FoodItem.jsx";
+
 
 export default function App() {
   return (
     <div className="bg-customBackground min-h-screen">
       <BrowserRouter>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -20,6 +23,7 @@ export default function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="finalize-payment" element={<FinalizedBill />} />
+          <Route path="/food-item" element={<FoodItem />} />
         </Routes>
       </BrowserRouter>
     </div>
