@@ -6,6 +6,7 @@ import ProfilePage from "./pages/Profile.jsx";
 import Login from "./pages/Login.jsx";
 import LoginOTP from "./pages/LoginOTP.jsx";
 import Orders from "./pages/Orders.jsx";
+import FinalizedBill from "./pages/FinalizedBill.jsx";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="finalize-payment" element={<FinalizedBill />} />
         </Routes>
       </BrowserRouter>
     </div>

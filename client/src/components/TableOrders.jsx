@@ -86,7 +86,7 @@ const TableOrders = ({ foodItemList, onPlaceOrder }) => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center">
-        <h2 className="text-icon-sub-heading px-8 py-2 flex-shrink-0">
+        <h2 className="text-result-heading px-8 py-2 flex-shrink-0">
           Table Orders
         </h2>
         <SortAndResetFilterSet

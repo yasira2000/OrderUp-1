@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate and useLocation
 import Header from "../components/Header";
 import CustomerNavBar from "../components/CustomerNavBar";
 
 import OrdersSecNavBar from "../components/OrdersSecNavBar";
-import SortAndResetFilterSet from "../components/FilterComponents/FullFilterSets/SortAndResetFilterSet";
-import OrderPageFoodCard from "../components/Cards/OrderPageFoodCard";
 
 import foodImage1 from "../../assets/Images/food01.jpg";
 import foodImage2 from "../../assets/Images/food02.jpg";
@@ -12,11 +11,19 @@ import foodImage3 from "../../assets/Images/food03.jpg";
 import foodImage4 from "../../assets/Images/food04.jpg";
 import MyOrders from "../components/MyOrders";
 import TableOrders from "../components/TableOrders";
-import BillPageFoodCard from "../components/Cards/BillPageFoodCard";
 import Bill from "../components/Bill";
 
 export default function Orders() {
-  const [secNavPage, setSecNavPage] = useState("myOrders");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialPage = searchParams.get("secNavPage") || "myOrders";
+  const [secNavPage, setSecNavPage] = useState(initialPage);
+
+  useEffect(() => {
+    if (searchParams.get("secNavPage")) {
+      setSecNavPage(searchParams.get("secNavPage"));
+    }
+  }, [location]);
 
   const handleSecNavPage = (page) => {
     setSecNavPage(page);
@@ -39,6 +46,12 @@ export default function Orders() {
 
   const onPlaceOrder = () => {
     console.log("Order Placed");
+  };
+
+  const navigate = useNavigate(); // Get the navigate function
+  const onPay = () => {
+    console.log("go to Payment page");
+    navigate("/finalize-payment"); // Redirect to the finalize-payment page
   };
 
   const foodItemList = [
@@ -271,11 +284,7 @@ export default function Orders() {
       )}
 
       {secNavPage === "bill" && (
-        <Bill
-          foodItemList={foodItemList}
-          sortOn={sortOn.sort}
-          onPlaceOrder={onPlaceOrder}
-        />
+        <Bill foodItemList={foodItemList} sortOn={sortOn.sort} onPay={onPay} />
       )}
 
       <CustomerNavBar />

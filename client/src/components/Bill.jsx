@@ -1,10 +1,7 @@
 import React, { useState, useMemo } from "react";
-import OrderPageFoodCard from "./Cards/OrderPageFoodCard";
-import { MainButton } from "./MainButton";
 import OrderPagesFooter from "./OrderPagesFooter";
 import SortAndResetFilterSet from "./FilterComponents/FullFilterSets/SortAndResetFilterSet";
 import BillPageFoodCard from "./Cards/BillPageFoodCard";
-import SimpleTwoOptionPopUp from "./OtherPopUps/SimpleTwoOptionPopUp";
 
 const Bill = ({ foodItemList, onPay }) => {
   // State to keep track of counts for each food item by ID
@@ -105,7 +102,7 @@ const Bill = ({ foodItemList, onPay }) => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center">
-        <h2 className="text-icon-sub-heading px-8 py-2 flex-shrink-0">
+        <h2 className="text-result-heading px-8 py-2 flex-shrink-0">
           Total Bill
         </h2>
         <SortAndResetFilterSet
