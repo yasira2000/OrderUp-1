@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import ButtonSelectionDot from "./ButtonSelectionDot";
 
-const ButtonSelectionDotGrp = ({
-  items,
-  onItemSelect,
-  currentSelectedItem,
-}) => {
+const SingleSellectAddon = ({ items, onItemSelect, currentSelectedItem }) => {
   const [selectedItem, setSelectedItem] = useState(currentSelectedItem);
 
   const onInGrpItemSelect = (item) => {
@@ -19,7 +15,7 @@ const ButtonSelectionDotGrp = ({
       {items.map((item, index) => (
         <ButtonSelectionDot
           key={index}
-          buttonDisplayName={item.name }
+          buttonDisplayName={item.name}
           buttonValue={item}
           onPushdownButtonChange={onInGrpItemSelect}
           buttonState={selectedItem === item}
@@ -29,4 +25,4 @@ const ButtonSelectionDotGrp = ({
   );
 };
 
-export default ButtonSelectionDotGrp;
+export default SingleSellectAddon;

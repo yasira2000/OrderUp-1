@@ -45,3 +45,15 @@
 .slider::-ms-thumb {
   @apply w-4 h-4 rounded-full bg-customButtonSelected cursor-pointer relative top-1/2 transform;
 }
+
+.extra-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+  opacity: 0;
+}
+
+.extra-details.open {
+  max-height: 500px; /* Adjust based on your content */
+  opacity: 1;
+}

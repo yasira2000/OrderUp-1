@@ -1,12 +1,12 @@
 import React from "react";
 
-const FoodItemStat = ({title, value}) => {
+const FoodItemStat = ({ title, value }) => {
   return (
     <>
-      <h2 className="mt-3 text-sm font-[400] font-inter">{title}</h2>
-      <p className="text-xs text-black text-opacity-80 font-extralight font-inter mt-2">
-        {value}
-      </p>
+      <h2 className="mt-3 text-bold-icon-sub-heading font-bold-icon-sub-heading">
+        {title}
+      </h2>
+      <p className="text-small-icon-sub-heading text-darkGray  mt-2">{value}</p>
     </>
   );
 };
