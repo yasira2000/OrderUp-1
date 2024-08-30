@@ -60,6 +60,7 @@ const MyOrders = ({ foodItemList, onAddToTable }) => {
       ...prevCounts,
       [id]: newCount,
     }));
+    initialCounts[id] = newCount;
     console.log("Updated count of food item with id", id, "to", newCount);
 
     // try {

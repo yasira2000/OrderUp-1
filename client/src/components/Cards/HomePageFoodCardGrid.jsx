@@ -10,6 +10,7 @@ const HomePageFoodCardGrid = ({ heading, foodItemList }) => {
           <div key={index} className="w-full">
             <HomePageFoodCard
               name={foodItem.name}
+              foodItemId={foodItem.id}
               price={foodItem.price}
               rating={foodItem.rating}
               image={foodItem.image}

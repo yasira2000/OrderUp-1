@@ -19,6 +19,78 @@ import FilterPopUpMenu from "../components/FilterComponents/FilterPopUpMenue";
 
 import CustomerNavBar from "../components/CustomerNavBar";
 
+// Mock API call function
+const fetchFilteredFoodItems = async (filters) => {
+  console.log("Fetching food items with filters:", filters);
+
+  // Simulating API call delay
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const allFoodItems = [
+        {
+          id: 1,
+          name: "Pizza Margherita",
+          price: "$10",
+          rating: "4.5",
+          image: foodImage1,
+          prepTime: "30 mins",
+          category: "Main Courses",
+        },
+        {
+          id: 2,
+          name: "Chicken Alfredo Pasta",
+          price: "$20",
+          rating: "4.0",
+          image: foodImage2,
+          prepTime: "45 mins",
+          category: "Main Courses",
+        },
+        {
+          id: 3,
+          name: "Caesar Salad",
+          price: "$15",
+          rating: "4.2",
+          image: foodImage3,
+          prepTime: "15 mins",
+          category: "Side Dishes",
+        },
+        {
+          id: 4,
+          name: "Chocolate Cake",
+          price: "$25",
+          rating: "4.8",
+          image: foodImage4,
+          prepTime: "1 hr",
+          category: "Desserts",
+        },
+        {
+          id: 5,
+          name: "Sushi Platter",
+          price: "$30",
+          rating: "4.6",
+          image: foodImage1,
+          prepTime: "1 hr 30 mins",
+          category: "Starter",
+        },
+      ];
+
+      // Filter items based on provided filters (mock filtering logic)
+      const filteredItems = allFoodItems.filter((item) => {
+        console.log("item", item);
+        console.log("filters", filters);
+        if (filters.category && item.category !== filters.category) {
+          return false;
+        }
+
+        // Additional filter checks can be added here
+        return true;
+      });
+
+      resolve(filteredItems);
+    }, 500); // Simulate network delay
+  });
+};
+
 export default function Home() {
   const mealTypes = [
     "Side Dishes",
@@ -28,47 +100,24 @@ export default function Home() {
     "Starter",
   ];
 
-  const foodItemList = [
-    {
-      name: "Pizza Margherita",
-      price: "$10",
-      rating: "4.5",
-      image: foodImage1, // Assuming foodImage is imported or defined elsewhere
-      prepTime: "30 mins",
-    },
-    {
-      name: "Chicken Alfredo Pasta",
-      price: "$20",
-      rating: "4.0",
-      image: foodImage2,
-      prepTime: "45 mins",
-    },
-    {
-      name: "Caesar Salad",
-      price: "$15",
-      rating: "4.2",
-      image: foodImage3,
-      prepTime: "15 mins",
-    },
-    {
-      name: "Chocolate Cake",
-      price: "$25",
-      rating: "4.8",
-      image: foodImage4,
-      prepTime: "1 hr",
-    },
-    {
-      name: "Sushi Platter",
-      price: "$30",
-      rating: "4.6",
-      image: foodImage1,
-      prepTime: "1 hr 30 mins",
-    },
-  ];
-
+  const [foodItemList, setFoodItemList] = useState([]); // Initially empty
   const [commonFilters, setCommonFilters] = useState({});
   const [catFilters, setCatfilters] = useState({});
-  const [fullFilters, setFullFilters] = useState({});
+  const [fullFilters, setFullFilters] = useState({
+    category: "",
+    cuisine: [],
+    dietary: [],
+    exclude: [],
+    inStock: true,
+    include: [],
+    maxPrice: "",
+    portion: "",
+    rating: null,
+    sort: "",
+    time: "",
+    types: [],
+  });
+
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   useEffect(() => {
@@ -79,9 +128,11 @@ export default function Home() {
   }, [commonFilters, catFilters]);
 
   useEffect(() => {
-    // Log fullFilters state to verify the updated state
     console.log("fullFilters", fullFilters);
-  }, [fullFilters]); // Log whenever fullFilters changes
+
+    // Fetch filtered food items whenever filters change
+    fetchFilteredFoodItems(fullFilters).then((data) => setFoodItemList(data));
+  }, [fullFilters]);
 
   const resetFilters = () => {
     setCommonFilters({});

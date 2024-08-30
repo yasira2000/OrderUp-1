@@ -240,7 +240,12 @@ export default function FinalizedBill() {
   }, [tip, totalPrice]);
 
   const onTipChange = (e) => {
-    setTip(parseFloat(e.target.value));
+    // if not null and not empty
+    if (e.target.value && e.target.value !== "") {
+      setTip(parseFloat(e.target.value));
+    } else {
+      setTip(0);
+    }
   };
 
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
