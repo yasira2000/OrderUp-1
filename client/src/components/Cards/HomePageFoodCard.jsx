@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const HomePageFoodCard = ({
   name,
+  foodItemId,
   price,
   rating,
   image,
@@ -9,10 +11,23 @@ const HomePageFoodCard = ({
   height,
   width,
 }) => {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const handleClick = () => {
+    if (!foodItemId) {
+      console.warn("Food item ID is undefined. Cannot navigate.", name);
+      return;
+    }
+
+    console.log("Clicked on food item with ID:", foodItemId);
+
+    navigate(`/food-item?food_item_id=${foodItemId}`);
+  };
+
   return (
     <div
       className="relative"
       style={{ width: `${width}px`, height: `${height}px` }}
+      onClick={handleClick} // Add the onClick event handler
     >
       <div className="w-full h-full bg-white rounded-[25px] overflow-hidden">
         <img

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import main_course from "../../assets/Images/main-course.png";
@@ -9,6 +9,7 @@ import foodImage3 from "../../assets/Images/food03.jpg";
 import TextInput from "../components/InputComps/TextInput";
 import ButtonSelectionTickGrp from "../components/InputComps/ButtonSelectionTickGrp";
 import ButtonSelectionDotGrp from "../components/InputComps/ButtonSelectionDotGrp";
+import { IoChevronBack } from "react-icons/io5";
 
 // Initialize mock adapter and mock any dynamic ID request
 const mock = new MockAdapter(axios);
@@ -28,64 +29,64 @@ mock.onGet(/\/api\/food-items\/\d+/).reply(200, {
     spiciness: "🌶️🌶️🌶️",
     culinary: "Fried",
   },
-  addons: [
-    {
-      addon_id: 1,
-      type: "multi_select",
-      sub_topic: "Extra items",
-      name: "add extra cheese",
-      price: 93,
-    },
-    {
-      addon_id: 2,
-      type: "multi_select",
-      sub_topic: "Extra items",
-      name: "add extra sausage",
-      price: 9,
-    },
-    {
-      addon_id: 3,
-      type: "single_select",
-      sub_topic: "serve",
-      name: "Split the burger",
-      price: 3,
-    },
-    {
-      addon_id: 4,
-      type: "single_select",
-      sub_topic: "serve",
-      name: "serve hot",
-      price: 3,
-    },
-    {
-      addon_id: 5,
-      type: "count_select",
-      sub_topic: "number of",
-      name: "number of ham slices",
-      price: 9,
-    },
-    {
-      addon_id: 6,
-      type: "count_select",
-      sub_topic: "number of",
-      name: "number of hairs",
-      price: 7,
-    },
-    {
-      addon_id: 7,
-      type: "single_select",
-      sub_topic: "serve 2",
-      name: "Split the burger",
-      price: 3,
-    },
-    {
-      addon_id: 8,
-      type: "single_select",
-      sub_topic: "serve 2",
-      name: "serve hot",
-      price: 3,
-    },
-  ],
+  // addons: [
+  //   {
+  //     addon_id: 1,
+  //     type: "multi_select",
+  //     sub_topic: "Extra items",
+  //     name: "add extra cheese",
+  //     price: 93,
+  //   },
+  //   {
+  //     addon_id: 2,
+  //     type: "multi_select",
+  //     sub_topic: "Extra items",
+  //     name: "add extra sausage",
+  //     price: 9,
+  //   },
+  //   {
+  //     addon_id: 3,
+  //     type: "single_select",
+  //     sub_topic: "serve",
+  //     name: "Split the burger",
+  //     price: 3,
+  //   },
+  //   {
+  //     addon_id: 4,
+  //     type: "single_select",
+  //     sub_topic: "serve",
+  //     name: "serve hot",
+  //     price: 3,
+  //   },
+  //   {
+  //     addon_id: 5,
+  //     type: "count_select",
+  //     sub_topic: "number of",
+  //     name: "number of ham slices",
+  //     price: 9,
+  //   },
+  //   {
+  //     addon_id: 6,
+  //     type: "count_select",
+  //     sub_topic: "number of",
+  //     name: "number of hairs",
+  //     price: 7,
+  //   },
+  //   {
+  //     addon_id: 7,
+  //     type: "single_select",
+  //     sub_topic: "serve 2",
+  //     name: "Split the burger",
+  //     price: 3,
+  //   },
+  //   {
+  //     addon_id: 8,
+  //     type: "single_select",
+  //     sub_topic: "serve 2",
+  //     name: "serve hot",
+  //     price: 3,
+  //   },
+  // ],
 });
 
 const FoodItem = () => {
@@ -95,6 +96,7 @@ const FoodItem = () => {
   const [note, setNote] = useState("");
 
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Function to get query parameters
   const getQueryParam = (param) => {
@@ -151,124 +153,131 @@ const FoodItem = () => {
   };
 
   // Function to handle addon selection
-  const handleAddonChange = (sub_topic, addonName) => {
-    setAddonVals((prevVals) => ({
-      ...prevVals,
-      [sub_topic]: {
-        ...prevVals[sub_topic],
-        [addonName]: prevVals[sub_topic][addonName] === 1 ? 0 : 1,
-      },
-    }));
-  };
+  // const handleAddonChange = (sub_topic, addonName) => {
+  //   setAddonVals((prevVals) => ({
+  //     ...prevVals,
+  //     [sub_topic]: {
+  //       ...prevVals[sub_topic],
+  //       [addonName]: prevVals[sub_topic][addonName] === 1 ? 0 : 1,
+  //     },
+  //   }));
+  // };
 
   // Group addons by sub_topic and type
-  const groupAddonsBySubTopicAndType = (addons) => {
-    return addons.reduce((groups, addon) => {
-      const { sub_topic, type } = addon;
-      if (!groups[sub_topic]) {
-        groups[sub_topic] = {};
-      }
-      if (!groups[sub_topic][type]) {
-        groups[sub_topic][type] = [];
-      }
-      groups[sub_topic][type].push(addon);
-      return groups;
-    }, {});
-  };
+  // const groupAddonsBySubTopicAndType = (addons) => {
+  //   return addons.reduce((groups, addon) => {
+  //     const { sub_topic, type } = addon;
+  //     if (!groups[sub_topic]) {
+  //       groups[sub_topic] = {};
+  //     }
+  //     if (!groups[sub_topic][type]) {
+  //       groups[sub_topic][type] = [];
+  //     }
+  //     groups[sub_topic][type].push(addon);
+  //     return groups;
+  //   }, {});
+  // };
 
-  const groupedAddons = groupAddonsBySubTopicAndType(foodData.addons);
+  // const groupedAddons = groupAddonsBySubTopicAndType(foodData.addons);
 
   const noteUpdate = (note) => {
     setNote(note.target.value);
   };
 
   // Render grouped addons
-  const renderGroupedAddons = () => {
-    return Object.entries(groupedAddons).map(([sub_topic, types]) => (
-      <div key={sub_topic}>
-        <h2 className="font-inter text-2xl text-black text-opacity-70">
-          {sub_topic}
-        </h2>
-        {Object.entries(types).map(([type, addons]) => (
-          <div key={type}>
-            <h3 className="font-inter text-xl text-black text-opacity-60">
-              {type}
-            </h3>
-            {type === "multi_select" && (
-              <ButtonSelectionTickGrp
-                items={addons.map((addon) => addon.name)}
-                onItemSelect={(selectedItems) => {
-                  // set the addon value to 1 for the selected item and 0 for the rest
-                  addons.forEach((addon) => {
-                    onAddonSelect(
-                      sub_topic,
-                      type,
-                      addon.name,
-                      selectedItems.includes(addon.name) ? 1 : 0
-                    );
-                  });
-                }}
-                // create a list of selected items by checking the addonVals value of each addon under this sub_topic
-                currentSelectedItem={addons
-                  .filter((addon) => addonVals[sub_topic][addon.name] === 1)
-                  .map((addon) => addon.name)}
-              />
-            )}
-            {type === "single_select" && (
-              <ButtonSelectionDotGrp
-                items={addons.map((addon) => addon.name)}
-                onItemSelect={(selectedItem) => {
-                  // set the addon value to 1 for the selected item and 0 for the rest
-                  addons.forEach((addon) => {
-                    onAddonSelect(
-                      sub_topic,
-                      type,
-                      addon.name,
-                      addon.name === selectedItem ? 1 : 0
-                    );
-                  });
-                }}
-                currentSelectedItem={
-                  addons.find((addon) => addonVals[sub_topic][addon.name] === 1)
-                    ?.name
-                }
-              />
-            )}
-            {type === "count_select" && (
-              <ButtonSelectionDotGrp
-                items={addons.map((addon) => addon.name)}
-                onItemSelect={(selectedItem) => {
-                  // set the addon value to 1 for the selected item and 0 for the rest
-                  addons.forEach((addon) => {
-                    onAddonSelect(
-                      sub_topic,
-                      type,
-                      addon.name,
-                      addon.name === selectedItem ? 1 : 0
-                    );
-                  });
-                }}
-                currentSelectedItem={
-                  addons.find((addon) => addonVals[sub_topic][addon.name] === 1)
-                    ?.name
-                }
-              />
-            )}
-          </div>
-        ))}
-      </div>
-    ));
-  };
+  // const renderGroupedAddons = () => {
+  //   return Object.entries(groupedAddons).map(([sub_topic, types]) => (
+  //     <div key={sub_topic}>
+  //       <h2 className="font-inter text-2xl text-black text-opacity-70">
+  //         {sub_topic}
+  //       </h2>
+  //       {Object.entries(types).map(([type, addons]) => (
+  //         <div key={type}>
+  //           <h3 className="font-inter text-xl text-black text-opacity-60">
+  //             {type}
+  //           </h3>
+  //           {type === "multi_select" && (
+  //             <ButtonSelectionTickGrp
+  //               items={addons.map((addon) => addon.name)}
+  //               onItemSelect={(selectedItems) => {
+  //                 // set the addon value to 1 for the selected item and 0 for the rest
+  //                 addons.forEach((addon) => {
+  //                   onAddonSelect(
+  //                     sub_topic,
+  //                     type,
+  //                     addon.name,
+  //                     selectedItems.includes(addon.name) ? 1 : 0
+  //                   );
+  //                 });
+  //               }}
+  //               // create a list of selected items by checking the addonVals value of each addon under this sub_topic
+  //               currentSelectedItem={addons
+  //                 .filter((addon) => addonVals[sub_topic][addon.name] === 1)
+  //                 .map((addon) => addon.name)}
+  //             />
+  //           )}
+  //           {type === "single_select" && (
+  //             <ButtonSelectionDotGrp
+  //               items={addons.map((addon) => addon.name)}
+  //               onItemSelect={(selectedItem) => {
+  //                 // set the addon value to 1 for the selected item and 0 for the rest
+  //                 addons.forEach((addon) => {
+  //                   onAddonSelect(
+  //                     sub_topic,
+  //                     type,
+  //                     addon.name,
+  //                     addon.name === selectedItem ? 1 : 0
+  //                   );
+  //                 });
+  //               }}
+  //               currentSelectedItem={
+  //                 addons.find((addon) => addonVals[sub_topic][addon.name] === 1)
+  //                   ?.name
+  //               }
+  //             />
+  //           )}
+  //           {type === "count_select" && (
+  //             <ButtonSelectionDotGrp
+  //               items={addons.map((addon) => addon.name)}
+  //               onItemSelect={(selectedItem) => {
+  //                 // set the addon value to 1 for the selected item and 0 for the rest
+  //                 addons.forEach((addon) => {
+  //                   onAddonSelect(
+  //                     sub_topic,
+  //                     type,
+  //                     addon.name,
+  //                     addon.name === selectedItem ? 1 : 0
+  //                   );
+  //                 });
+  //               }}
+  //               currentSelectedItem={
+  //                 addons.find((addon) => addonVals[sub_topic][addon.name] === 1)
+  //                   ?.name
+  //               }
+  //             />
+  //           )}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   ));
+  // };
 
   return (
     <div className="flex flex-col w-full min-h-screen pb-8">
-      <div className="flex w-full">
+      <div className="relative w-full">
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-2 left-2 z-10 p-2 bg-white rounded-full focus:outline-none"
+        >
+          <IoChevronBack className="text-3xl" />
+        </button>
         <img
           src={foodData.image_loc || main_course}
           alt={foodData.food_item_name}
           className="w-full"
         />
       </div>
+
       <div className="flex flex-col bg-white pr-6 pl-6 pt-6 w-full">
         <h1 className="text-result-heading font-inter">
           {foodData.food_item_name}
@@ -358,7 +367,7 @@ const FoodItem = () => {
           </div>
         ))}
       </div> */}
-      {renderGroupedAddons()}
+      {/* {renderGroupedAddons()} */}
       {/* Note section */}
       <div className="flex flex-col w-full mt-4 pl-6 pr-6 pb-6">
         <h2>Add a note</h2>

@@ -11,6 +11,7 @@ const HorizontalScrollableList = ({ heading, foodItemList }) => {
             <div key={index} className="flex-none px-2">
               <HomePageFoodCard
                 name={foodItem.name}
+                foodItemId={foodItem.id}
                 price={foodItem.price}
                 rating={foodItem.rating}
                 image={foodItem.image}

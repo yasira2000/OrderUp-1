@@ -19,7 +19,7 @@ const ButtonSelectionDotGrp = ({
       {items.map((item, index) => (
         <ButtonSelectionDot
           key={index}
-          buttonDisplayName={item.name }
+          buttonDisplayName={item}
           buttonValue={item}
           onPushdownButtonChange={onInGrpItemSelect}
           buttonState={selectedItem === item}
